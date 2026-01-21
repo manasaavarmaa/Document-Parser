@@ -26,6 +26,7 @@ The system is built as a lightweight web service with a clear separation between
 ---
 
 ## Project Structure
+```
 Parser/
 ├── app.py # Main Flask application
 ├── processing/
@@ -42,7 +43,7 @@ Parser/
 ├── requirements.txt # Python dependencies
 └── README.md
 
-
+```
 ---
 
 ## Workflow
