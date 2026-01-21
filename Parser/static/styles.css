@@ -1,0 +1,160 @@
+/* ===== GLOBAL ===== */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.container {
+    width: 98%;
+    margin: 10px auto;
+    background: #ffffff;
+    border: 1px solid #cfd6dc;
+}
+
+/* ===== PAGE TITLE ===== */
+.page-title {
+    font-size: 22px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+/* ===== SECTION HEADERS ===== */
+.section-header {
+    background: #4a7fa3;   /* GOVT BLUE */
+    color: #ffffff;
+    text-align: center;
+    font-weight: bold;
+    padding: 8px;
+    border-top: 1px solid #cfd6dc;
+    border-bottom: 1px solid #cfd6dc;
+}
+
+.section-header.yellow-text {
+    color: #ffeb00; /* GOVT YELLOW TEXT */
+}
+
+/* ===== TABLE LAYOUT ===== */
+.form-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.form-table td {
+    border: 1px solid #d9e0e6;
+    padding: 8px;
+    vertical-align: top;
+    background: #ffffff;
+}
+
+/* ===== LABEL COLUMN ===== */
+.label {
+    width: 22%;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* ===== REQUIRED STAR ===== */
+.req {
+    color: #cc0000;
+    font-weight: bold;
+}
+
+/* ===== INPUT FIELDS ===== */
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+    width: 96%;
+    padding: 5px;
+    border: 1px solid #c0c8cf;
+    border-radius: 2px;
+    font-size: 13px;
+}
+
+textarea {
+    height: 60px;
+    resize: none;
+}
+
+/* ===== RADIO BUTTON ALIGNMENT ===== */
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* ===== FILE INPUT ===== */
+input[type="file"] {
+    font-size: 13px;
+}
+
+/* ===== HELPER TEXT ===== */
+.hint {
+    font-size: 12px;
+    color: #6c757d;
+    display: block;
+    margin-top: 3px;
+}
+
+/* ===== RED WARNING TEXT ===== */
+.red-text {
+    color: #cc0000;
+    font-size: 12px;
+}
+
+/* ===== CHECKBOX LINE ===== */
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/* ===== BUTTONS ===== */
+.buttons {
+    text-align: center;
+    padding: 15px;
+}
+
+.buttons button {
+    padding: 6px 18px;
+    font-size: 14px;
+    margin: 0 5px;
+    border: 1px solid #4a7fa3;
+    background: #4a7fa3;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.buttons button[disabled] {
+    background: #cfd6dc;
+    border-color: #cfd6dc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+.buttons button:last-child {
+    background: #ffffff;
+    color: #000000;
+    border: 1px solid #999;
+}
+.company-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ccc;
+    max-height: 160px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.company-dropdown div {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.company-dropdown div:hover {
+    background-color: #f0f0f0;
+}

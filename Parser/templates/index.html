@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visitor / Contract Employee Id</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<form method="POST" action="/save-visitor" enctype="multipart/form-data">
+
+<div class="container">
+
+    <h2 class="page-title">Visitor / Contract Employee Id</h2>
+
+    <!-- ================= VISITOR DETAILS ================= -->
+    <div class="section-header blue">Visitor Details</div>
+
+    <table class="form-table">
+
+        <tr>
+            <td class="label">Name<span class="req">*</span></td>
+            <td>
+                <input type="text" id="name">
+                <span class="hint">100 characters remaining</span>
+            </td>
+
+            <td class="label">Gender<span class="req">*</span></td>
+            <td>
+                <label><input type="radio" name="gender" value="Male"> Male</label>
+                <label><input type="radio" name="gender" value="Female"> Female</label>
+                <label><input type="radio" name="gender" value="Transgender"> Transgender</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="label">Company<span class="req">*</span></td>
+            <td>
+    <div style="position:relative;">
+    <input
+        type="text"
+        id="company"
+        placeholder="Search or type company"
+        autocomplete="off"
+        style="width:100%;"
+    >
+
+    <div
+        id="companyDropdown"
+        style="
+            display:none;
+            position:absolute;
+            background:#fff;
+            border:1px solid #ccc;
+            width:100%;
+            max-height:150px;
+            overflow-y:auto;
+            z-index:1000;
+        "
+    ></div>
+</div>
+
+
+
+            <td class="label">Designation<span class="req">*</span></td>
+            <td>
+                <input type="text" id="designation">
+                <span class="hint">50 characters remaining</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="label">
+                Permanent Address<span class="req">*</span><br>
+                <span class="red-text">(As on ID Proof/AADHAR Card)</span>
+            </td>
+            <td>
+                <textarea id="permanent_address"></textarea>
+                <span class="hint">500 characters remaining</span>
+            </td>
+
+            <td class="label">City<span class="req">*</span></td>
+            <td>
+                <input type="text" id="city">
+                <span class="hint">50 characters remaining</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="label">State<span class="req">*</span></td>
+            <td>
+                <select id="state">
+                    <option value="">Select State</option>
+                    <option>Andhra Pradesh</option>
+                    <option>Arunachal Pradesh</option>
+                    <option>Assam</option>
+                    <option>Bihar</option>
+                    <option>Chhattisgarh</option>
+                    <option>Delhi</option>
+                    <option>Goa</option>
+                    <option>Gujarat</option>
+                    <option>Haryana</option>
+                    <option>Himachal Pradesh</option>
+                    <option>Jharkhand</option>
+                    <option>Karnataka</option>
+                    <option>Kerala</option>
+                    <option>Madhya Pradesh</option>
+                    <option>Maharashtra</option>
+                    <option>Odisha</option>
+                    <option>Punjab</option>
+                    <option>Rajasthan</option>
+                    <option>Tamil Nadu</option>
+                    <option>Telangana</option>
+                    <option>Uttar Pradesh</option>
+                    <option>West Bengal</option>
+                </select>
+            </td>
+
+            <td class="label">Country<span class="req">*</span></td>
+            <td>
+                <select id="country">
+                    <option value="">Select Country</option>
+                    <option value="India">India</option>
+                    <option value="United States">United States</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Australia">Australia</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="label">Mobile Number<span class="req">*</span></td>
+            <td><input type="text" id="mobile"></td>
+            
+            <td class="label">ID Proof Type<span class="req">*</span></td>
+            <td>
+                <select id="id_proof_type">
+                    <option>AADHAR CARD</option>
+                    <option>DRIVING LICENSE</option>
+                    <option>VOTER ID</option>
+                    <option>PASSPORT</option>
+    
+                </select>
+            </td>
+        </tr>
+        <script>
+        document.getElementById("id_proof_type").addEventListener("change", function () {
+        document.getElementById("idTypeWarning").style.display = "none";
+});
+</script>
+
+        <tr>
+            <td class="label">ID Proof No<span class="req">*</span></td>
+            <td><input type="text" id="id_number"></td>
+
+            <td class="label">ReEnter ID Proof No<span class="req">*</span></td>
+            <td><input type="text" id="re_id_number"></td>
+        </tr>
+
+        <tr>
+            <td class="label">
+                ID Proof<span class="req">*</span><br>
+                <span class="hint">( Maximum File Size: 2MB )</span><br>
+                <span class="red-text">Please upload both sides of ID Card/AADHAR Card</span>
+            </td>
+            <td>
+                <input type="file" id="id_files" multiple>
+            </td>
+
+            <td class="label">
+                Photo<br>
+                <span class="hint">( Maximum File Size: 300 KB )</span>
+            </td>
+            <td>
+                <input type="file" id="photo">
+
+                <!-- ✅ PHOTO PREVIEW (FIXED & WORKING) -->
+                <img
+                    id="photoPreview"
+                    src=""
+                    alt="Photo Preview"
+                    style="
+                        display:none;
+                        margin-top:8px;
+                        width:120px;
+                        height:150px;
+                        object-fit:cover;
+                        border:1px solid #999;
+                    "
+                />
+            </td>
+        </tr>
+
+        <tr>
+            <td class="label">Year Of Birth<span class="req">*</span></td>
+            <td>
+                <input type="text" id="dob"><br>
+                <span class="age-label">Age (in years): </span>
+                <span id="ageValue" class="age-value">--</span>
+            </td>
+
+            <td class="label">
+                Driving License<br>
+                <span class="hint">( Maximum File Size: 2MB )</span><br>
+                <span class="red-text">Please upload both sides</span>
+            </td>
+            <td><input type="file"></td>
+        </tr>
+
+    </table>
+
+    <!-- ================= EXTRA INFORMATION ================= -->
+    <div class="section-header blue yellow-text">
+        Extra Information (Mandatory for One/Three month pass)
+    </div>
+
+    <table class="form-table">
+
+        <tr>
+            <td class="label">
+                Present Address<span class="req">*</span><br>
+                <input type="checkbox" id="same_address">
+                <span class="hint">( Same as Permanent Address )</span>
+            </td>
+            <td>
+                <textarea id="present_address"></textarea>
+                <span class="hint">250 characters remaining</span>
+            </td>
+
+            <td class="label">Height (in cms)<span class="req">*</span></td>
+            <td><input type="text" id="height"></td>
+        </tr>
+
+        <tr>
+            <td class="label">City<span class="req">*</span></td>
+            <td><input type="text" id="present_city"></td>
+
+            <td class="label">Religion<span class="req">*</span></td>
+            <td>
+                <select id="religion">
+                    <option>Select Religion</option>
+                    <option>Hindu</option>
+                    <option>Muslim</option>
+                    <option>Christian</option>
+                    <option>Sikh</option>
+                    <option>Other</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="label">State<span class="req">*</span></td>
+            <td>
+                <select id="present_state">
+                    <option value="">Select State</option>
+                    <option>Andhra Pradesh</option>
+                    <option>Arunachal Pradesh</option>
+                    <option>Assam</option>
+                    <option>Bihar</option>
+                    <option>Chhattisgarh</option>
+                    <option>Delhi</option>
+                    <option>Goa</option>
+                    <option>Gujarat</option>
+                    <option>Haryana</option>
+                    <option>Himachal Pradesh</option>
+                    <option>Jharkhand</option>
+                    <option>Karnataka</option>
+                    <option>Kerala</option>
+                    <option>Madhya Pradesh</option>
+                    <option>Maharashtra</option>
+                    <option>Odisha</option>
+                    <option>Punjab</option>
+                    <option>Rajasthan</option>
+                    <option>Tamil Nadu</option>
+                    <option>Telangana</option>
+                    <option>Uttar Pradesh</option>
+                    <option>West Bengal</option>
+                </select>
+            </td>
+
+            <td class="label">Identification Marks<span class="req">*</span></td>
+            <td>
+                <textarea id="identification_marks"></textarea>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="label">Country<span class="req">*</span></td>
+            <td>
+                <select id="present_country">
+                    <option value="">Select Country</option>
+                    <option value="India">India</option>
+                    <option value="United States">United States</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Australia">Australia</option>
+                </select>
+            </td>
+
+            <td class="label">Type Of Category<span class="req">*</span></td>
+            <td>
+                <select id="category">
+                    <option>Select Category</option>
+                    <option>Student Trainee</option>
+                    <option>Employee</option>
+                    <option>Contract Employee</option>
+                    <option>Temporary Employee</option>
+                    <option>Permanent Employee</option>
+                    <option>Apprentice</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="label">Address Proof Type<span class="req">*</span></td>
+            <td>
+                <select id="address_proof_type">
+                    <option>Please Select</option>
+                    <option>Electricity Bill</option>
+                    <option>Gas Bill</option>
+                    <option>Other</option>
+                </select>
+            </td>
+
+            <td class="label">Contact Person Name<span class="req">*</span></td>
+            <td><input type="text" id="contact_person_name"></td>
+        </tr>
+
+        <tr>
+            <td class="label">Address Proof<span class="req">*</span></td>
+            <td><input type="file" id="present_address_file"></td>
+            
+
+            <td class="label">Contact Person Relation<span class="req">*</span></td>
+            <td><input type="text" id="contact_person_relation"></td>
+        </tr>
+
+        <tr>
+            <td></td><td></td>
+            <td class="label">Contact Person Address<span class="req">*</span></td>
+            <td><textarea id="contact_person_address"></textarea></td>
+        </tr>
+
+        <tr>
+            <td></td><td></td>
+            <td class="label">Contact Person Telephone No<span class="req">*</span></td>
+            <td><input type="text" id="contact_person_phone"></td>
+        </tr>
+
+    </table>
+
+    <div class="buttons">
+    <button type="submit">Save</button>
+    <button type="button" onclick="goBack()">Back</button>
+</div>
+
+
+</div>
+</form>
+<script src="/static/autofill.js"></script>
+<script>
+function goBack() {
+    document.querySelector('.page-title')
+        .scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+<script>
+window.onload = function () {
+    alert("Please select ID Proof Type before uploading the document.");
+};
+</script>
+<script src="/static/autofill.js"></script>
+<script src="/static/autofill_voter.js"></script>
+
+</body>
+</html>
+<script>
+const companies = [
+    "Google",
+    "Microsoft",
+    "Apple",
+    "Amazon",
+    "Facebook",
+    "IBM",
+    "Intel",
+    "Oracle",
+    "Cisco",
+    "Salesforce",
+    "Adobe",
+    "Dell Technologies",
+    "HP Inc.",
+    "Accenture",
+    "Infosys",
+    "Tata Consultancy Services",
+    "Wipro",
+    "Cognizant",
+    "Capgemini",
+    "HCL Technologies",
+    "Other" 
+];
+
+const input = document.getElementById("company");
+const dropdown = document.getElementById("companyDropdown");
+
+input.addEventListener("input", () => {
+    const value = input.value.toLowerCase();
+    dropdown.innerHTML = "";
+
+    const matches = companies.filter(c =>
+        c.toLowerCase().includes(value)
+    );
+
+    if (matches.length === 0 && value !== "") {
+        dropdown.style.display = "none";
+        return;
+    }
+
+    matches.forEach(company => {
+        const div = document.createElement("div");
+        div.textContent = company;
+        div.style.padding = "6px";
+        div.style.cursor = "pointer";
+
+        div.onclick = () => {
+            input.value = company;
+            dropdown.style.display = "none";
+        };
+
+        dropdown.appendChild(div);
+    });
+
+    dropdown.style.display = "block";
+});
+
+document.addEventListener("click", (e) => {
+    if (!input.contains(e.target)) {
+        dropdown.style.display = "none";
+    }
+});
+</script>
+<script>
+document.getElementById("photo").addEventListener("change", function () {
+    const file = this.files[0];
+    if (!file) return;
+
+    const preview = document.getElementById("photoPreview");
+    preview.src = URL.createObjectURL(file);
+    preview.style.display = "block";
+});
+</script>
+<script src="/static/extra_info.js"></script>
