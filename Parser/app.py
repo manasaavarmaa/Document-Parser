@@ -6,7 +6,7 @@ from processing.ocr import ocr_aadhaar
 from processing.photo_extract import extract_photo
 from werkzeug.utils import secure_filename
 
-# ✅ NEW import (extra info OCR)
+# NEW import (extra info OCR)
 from processing.extra_info.address_ocr import extract_present_address
 
 app = Flask(__name__)
@@ -16,11 +16,11 @@ app = Flask(__name__)
 # -----------------------------
 UPLOAD_FOLDER = "uploads"
 PHOTO_FOLDER = os.path.join("uploads", "photos")
-EXTRA_INFO_FOLDER = os.path.join("uploads", "extra_info")  # ✅ NEW
+EXTRA_INFO_FOLDER = os.path.join("uploads", "extra_info") 
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(PHOTO_FOLDER, exist_ok=True)
-os.makedirs(EXTRA_INFO_FOLDER, exist_ok=True)  # ✅ NEW
+os.makedirs(EXTRA_INFO_FOLDER, exist_ok=True) 
 
 
 @app.route("/")
@@ -59,7 +59,7 @@ def upload_id():
     visitor_file = files[0]
     filename = secure_filename(visitor_file.filename)
     visitor_path = os.path.join(UPLOAD_FOLDER, filename)
-    visitor_file.save(visitor_path)2
+    visitor_file.save(visitor_path)
     id_type = request.form.get("id_proof_type", "").strip()
     if id_type == "AADHAR CARD":
         data = ocr_aadhaar(visitor_path) or {}
@@ -92,7 +92,7 @@ def upload_id():
 
 
 # =====================================================
-# ✅ EXTRA INFORMATION OCR (NEW & SEPARATE)
+# EXTRA INFORMATION OCR (NEW & SEPARATE)
 # =====================================================
 @app.route("/ocr/extra-info", methods=["POST"])
 def extra_info_ocr():
@@ -144,12 +144,12 @@ def save_visitor():
         address_proof.save(addr_path)
         saved_files["address_proof"] = addr_path
         
-        # ✅ AUTO-OCR the address proof
+        # AUTO-OCR the address proof
         try:
             address_data = extract_present_address(addr_path)
             if address_data.get("present_address"):
                 form_data["extracted_present_address"] = address_data["present_address"]
-                print(f"✅ Extracted address: {address_data['present_address']}")
+                print(f" Extracted address: {address_data['present_address']}")
         except Exception as e:
             print(f"❌ Address OCR failed: {e}")
 
@@ -174,3 +174,4 @@ def uploaded_photo(filename):
 
 if __name__ == "__main__":
     app.run(debug=True)
+
