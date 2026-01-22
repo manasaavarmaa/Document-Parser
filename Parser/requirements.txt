@@ -6,3 +6,4 @@ pillow
 numpy
 pyzbar
 lxml
+gunicorn
