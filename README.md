@@ -77,3 +77,6 @@ Improved accuracy using model fine-tuning
 Export results in structured formats (JSON, CSV)
 
 API-based integration support
+```
+
+## https://github.com/UB-Mannheim/tesseract/wiki
