@@ -79,4 +79,5 @@ Export results in structured formats (JSON, CSV)
 API-based integration support
 ```
 
+# Tesseract setup
 ## https://github.com/UB-Mannheim/tesseract/wiki
